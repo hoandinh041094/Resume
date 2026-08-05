@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoan Dinh · Commercial Analytics</title>
+<meta name="description" content="Hoan Dinh, Commercial Analytics Manager at FanDuel. Forecasting, promo efficiency, share of wallet, and governed data pipelines.">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Hoan Dinh · Commercial Analytics">
+<meta property="og:description" content="Analytics leader at FanDuel. $3B in handle forecast within 5% of actuals. Governed pipelines in Python, SQL, and Databricks.">
+<meta property="og:url" content="https://hoandinh.com/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0B241E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B241E'/%3E%3Cpath d='M5 24 L12 15 L18 19 L27 7' fill='none' stroke='%23F5B23C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300..600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --turf:#0B241E;
+  --turf-2:#0F3128;
+  --turf-3:#143C31;
+  --rail:#2C5A4B;
+  --tote:#F5B23C;
+  --signal:#6FE3B0;
+  --chalk:#E8F0EB;
+  --chalk-dim:#9FB6AC;
+
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Newsreader',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --gut:clamp(20px,5vw,72px);
+  --maxw:1180px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--turf);
+  color:var(--chalk);
+  font-family:var(--body);
+  font-size:clamp(16px,1.05vw,18px);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(115% 70% at 12% -10%, rgba(245,178,60,.09), transparent 60%),
+    radial-gradient(80% 55% at 95% 4%, rgba(111,227,176,.06), transparent 62%);
+  background-attachment:fixed;
+}
+
+.shell{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+
+a{color:inherit}
+:focus-visible{outline:2px solid var(--tote);outline-offset:3px;border-radius:2px}
+
+/* ---------- shared type utilities ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.20em;
+  text-transform:uppercase;
+  color:var(--tote);
+}
+.eyebrow-dim{color:var(--chalk-dim)}
+
+.h-display{
+  font-family:var(--display);
+  font-variation-settings:'wdth' 116,'wght' 800;
+  line-height:.98;
+  letter-spacing:-.015em;
+  margin:0;
+  text-wrap:balance;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  position:sticky;top:0;z-index:60;
+  background:rgba(11,36,30,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rail);
+}
+.masthead-in{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  height:60px;
+}
+.wordmark{
+  font-family:var(--display);
+  font-variation-settings:'wdth' 112,'wght' 700;
+  font-size:15px;letter-spacing:.13em;text-transform:uppercase;
+  text-decoration:none;
+}
+.mast-nav{display:flex;gap:26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
+.mast-nav a{text-decoration:none;color:var(--chalk-dim);transition:color .18s}
+.mast-nav a:hover{color:var(--tote)}
+@media(max-width:640px){.mast-nav a:nth-child(1),.mast-nav a:nth-child(2){display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(48px,7vw,88px) 0 0}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:22px 56px;align-items:end}
+.hero h1{font-size:clamp(38px,6.2vw,80px);max-width:16ch;margin:18px 0 0}
+.hero h1 .accent{color:var(--tote)}
+.hero-sub{
+  margin:0;max-width:56ch;
+  font-size:clamp(17px,1.35vw,20px);
+  color:#CFDDD6;font-weight:300;
+}
+@media(min-width:1060px){
+  .hero-grid{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
+  .hero h1{font-size:clamp(52px,4.8vw,68px)}
+  .hero-sub{max-width:38ch;padding-bottom:10px;border-left:1px solid var(--rail);padding-left:28px}
+}
+section[id]{scroll-margin-top:76px}
+
+/* ---------- chart ---------- */
+.chart-wrap{margin:clamp(38px,5vw,62px) 0 0}
+.chart-head{
+  display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline;
+  padding-bottom:14px;border-bottom:1px solid var(--rail);
+}
+.chart-legend{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--chalk-dim);margin-left:auto}
+.chart-legend span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:16px;height:0;border-top:2px solid var(--signal)}
+.swatch.dash{border-top:2px dashed var(--tote)}
+.swatch.band{height:9px;border:none;background:rgba(245,178,60,.20);border-top:1px solid rgba(245,178,60,.42);border-bottom:1px solid rgba(245,178,60,.42)}
+.chart-box{background:var(--turf-2);border:1px solid var(--rail);border-top:none;padding:18px 14px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.chart-box svg{display:block;width:100%;height:auto;min-width:560px}
+.gl{stroke:var(--rail);stroke-width:1;opacity:.55}
+.axis-t{font-family:var(--mono);font-size:10px;letter-spacing:.1em;fill:var(--chalk-dim)}
+.band-fill{fill:rgba(245,178,60,.16);stroke:rgba(245,178,60,.38);stroke-width:1}
+.fc-line{fill:none;stroke:var(--tote);stroke-width:1.6;stroke-dasharray:5 5;opacity:.85}
+.ac-line{fill:none;stroke:var(--signal);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.tip{fill:var(--signal)}
+.tip-halo{fill:var(--signal);opacity:.22}
+
+#wipe rect{transform-origin:left}
+.animate #wipe rect{animation:wipe 1.5s cubic-bezier(.22,.75,.3,1) forwards}
+@keyframes wipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.animate .tipgrp{opacity:0;animation:fadein .5s ease 1.35s forwards}
+.animate .tip-halo{animation:pulse 2.6s ease-in-out 1.9s infinite}
+@keyframes fadein{to{opacity:1}}
+@keyframes pulse{0%,100%{r:7;opacity:.22}50%{r:13;opacity:.05}}
+
+/* ---------- tote strip ---------- */
+.tote{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--rail);border-top:none;
+  background:var(--turf-3);
+}
+.tote-cell{padding:20px 18px 18px;border-left:1px solid var(--rail)}
+.tote-cell:first-child{border-left:none}
+.tote-num{
+  font-family:var(--mono);font-weight:600;
+  font-size:clamp(24px,3.1vw,38px);
+  color:var(--tote);line-height:1;letter-spacing:-.02em;
+  font-feature-settings:'tnum';
+}
+.tote-lab{
+  margin-top:10px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--chalk-dim);line-height:1.5;
+}
+@media(max-width:760px){
+  .tote{grid-template-columns:repeat(2,1fr)}
+  .tote-cell:nth-child(3){border-left:none}
+  .tote-cell:nth-child(n+3){border-top:1px solid var(--rail)}
+}
+
+/* ---------- generic section ---------- */
+.band-sec{padding:clamp(64px,9vw,120px) 0}
+.sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(30px,4vw,52px)}
+.sec-head h2{font-size:clamp(28px,3.9vw,50px)}
+.sec-note{max-width:52ch;color:#C3D4CC;font-weight:300;margin:0}
+
+/* ---------- ledger ---------- */
+.ledger{border-top:1px solid var(--rail)}
+.row{
+  display:grid;grid-template-columns:minmax(190px,1.05fr) 2fr minmax(180px,1fr);
+  gap:8px 34px;padding:26px 4px;
+  border-bottom:1px solid var(--rail);
+  transition:background .22s,padding-left .22s;
+}
+.row:hover{background:rgba(255,255,255,.028);padding-left:14px}
+.row-t{
+  font-family:var(--display);font-variation-settings:'wdth' 108,'wght' 640;
+  font-size:19px;letter-spacing:-.005em;line-height:1.24;
+}
+.row-d{margin:0;color:#C3D4CC;font-weight:300;font-size:16.5px;line-height:1.55}
+.row-p{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  color:var(--tote);line-height:1.75;align-self:center;
+}
+@media(max-width:860px){
+  .row{grid-template-columns:1fr;gap:10px;padding:24px 4px}
+  .row-p{align-self:start}
+}
+
+/* ---------- track record ---------- */
+.job{
+  display:grid;grid-template-columns:minmax(150px,.55fr) 3fr;gap:12px 34px;
+  padding:34px 0;border-top:1px solid var(--rail);
+}
+.job:last-of-type{border-bottom:1px solid var(--rail)}
+.job-when{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk-dim);line-height:1.9;padding-top:5px}
+.job-where{display:block;color:var(--tote)}
+.job h3{
+  font-family:var(--display);font-variation-settings:'wdth' 112,'wght' 720;
+  font-size:clamp(21px,2.4vw,29px);margin:0 0 14px;line-height:1.1;letter-spacing:-.01em;
+}
+.job ul{margin:0;padding:0;list-style:none}
+.job li{position:relative;padding-left:20px;margin-bottom:11px;color:#C6D6CE;font-weight:300;font-size:16.5px}
+.job li::before{content:"";position:absolute;left:0;top:.72em;width:8px;height:1px;background:var(--tote)}
+.job li:last-child{margin-bottom:0}
+@media(max-width:860px){.job{grid-template-columns:1fr;gap:16px}}
+
+/* ---------- principles ---------- */
+.tenets{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rail);border:1px solid var(--rail)}
+.tenet{background:var(--turf-2);padding:32px 26px 34px}
+.tenet-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--signal)}
+.tenet h3{
+  font-family:var(--display);font-variation-settings:'wdth' 108,'wght' 660;
+  font-size:20px;margin:14px 0 10px;line-height:1.2;
+}
+.tenet p{margin:0;color:#BDD0C7;font-weight:300;font-size:16px;line-height:1.58}
+@media(max-width:820px){.tenets{grid-template-columns:1fr}}
+
+/* ---------- kit ---------- */
+.kit{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(28px,4vw,56px)}
+.kit-grp{border-top:1px solid var(--rail);padding-top:20px}
+.kit-grp h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tote);margin:0 0 16px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:.03em;padding:6px 11px;border:1px solid var(--rail);color:#CFDDD6;background:var(--turf-2)}
+.deg{margin:0 0 16px}
+.deg:last-child{margin-bottom:0}
+.deg b{
+  display:block;font-family:var(--display);font-variation-settings:'wdth' 108,'wght' 640;
+  font-size:17px;font-weight:400;letter-spacing:-.005em;
+}
+.deg span{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--chalk-dim)}
+@media(max-width:820px){.kit{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+.contact{border-top:1px solid var(--rail);padding:clamp(64px,9vw,110px) 0 clamp(48px,6vw,80px)}
+.contact h2{font-size:clamp(32px,5.4vw,68px);max-width:14ch}
+.links{display:flex;flex-wrap:wrap;gap:12px 34px;margin-top:34px}
+.links a{
+  font-family:var(--mono);font-size:14px;letter-spacing:.04em;
+  text-decoration:none;color:var(--chalk);
+  border-bottom:1px solid var(--rail);padding-bottom:5px;transition:color .18s,border-color .18s;
+}
+.links a:hover{color:var(--tote);border-color:var(--tote)}
+.colophon{
+  margin-top:clamp(48px,6vw,80px);padding-top:18px;border-top:1px solid var(--rail);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--chalk-dim);
+}
+
+/* ---------- reveal ---------- */
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.75,.3,1)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .rv{opacity:1;transform:none;transition:none}
+  .animate #wipe rect{animation:none}
+  .animate .tipgrp{opacity:1;animation:none}
+  .animate .tip-halo{animation:none}
+  .row:hover{padding-left:4px}
+}
+
+/* ---------- skip link ---------- */
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--tote);color:var(--turf);
+  font-family:var(--mono);font-size:13px;padding:10px 16px;text-decoration:none;
+}
+.skip:focus{left:12px;top:12px}
+
+/* ---------- print ---------- */
+@media print{
+  :root{--turf:#fff;--turf-2:#fff;--turf-3:#fff;--rail:#bcc8c2;--tote:#8a5d00;--signal:#1c7a4f;--chalk:#111;--chalk-dim:#555}
+  body{background:#fff;color:#111;background-image:none;font-size:12pt}
+  .masthead{position:static;background:#fff;backdrop-filter:none}
+  .mast-nav,.skip{display:none}
+  .js .rv{opacity:1 !important;transform:none !important;transition:none}
+  #wipe rect{transform:none !important;animation:none !important}
+  .tipgrp{opacity:1 !important}
+  .hero-sub,.sec-note,.row-d,.job li,.tenet p{color:#333}
+  .tote-num{color:#8a5d00}
+  a{text-decoration:none}
+  .links a{border-bottom:none}
+  .band-sec,.hero,.contact{padding-top:28px;padding-bottom:8px}
+  .chip{color:#333;border-color:#bbb;background:#fff}
+  .deg span,.job-when{color:#555}
+  .row,.job,.tenet{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#top">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead-in">
+    <a class="wordmark" href="#top">Hoan Dinh</a>
+    <nav class="mast-nav">
+      <a href="#work">What I own</a>
+      <a href="#record">Track record</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="shell">
+      <p class="eyebrow">Commercial Analytics Manager · FanDuel · Los Angeles</p>
+      <div class="hero-grid">
+        <h1 class="h-display">The numbers a <span class="accent">$3B</span> business plans against.</h1>
+        <p class="hero-sub">Six years across sports betting and insurance. Today I lead Commercial Analytics at FanDuel, where I manage two analysts and rebuilt the function from ad hoc Excel work into governed, versioned pipelines in Python, SQL, and Databricks.</p>
+      </div>
+
+      <figure class="chart-wrap rv">
+        <figcaption class="chart-head">
+          <p class="eyebrow eyebrow-dim" style="margin:0">Racing handle · forecast vs actual · illustrative</p>
+          <div class="chart-legend">
+            <span><i class="swatch"></i>Actual</span>
+            <span><i class="swatch dash"></i>Forecast</span>
+            <span><i class="swatch band"></i>±5% band</span>
+          </div>
+        </figcaption>
+
+        <div class="chart-box">
+          <svg viewBox="0 0 820 268" role="img" aria-label="Line chart showing monthly racing handle. The actual line stays inside a plus or minus five percent forecast band across twelve months, rising from about 200 million dollars to about 290 million dollars.">
+            <defs>
+              <clipPath id="wipe"><rect x="0" y="0" width="820" height="268"></rect></clipPath>
+            </defs>
+
+            <!-- gridlines -->
+            <line class="gl" x1="70" y1="60"  x2="800" y2="60"></line>
+            <line class="gl" x1="70" y1="110" x2="800" y2="110"></line>
+            <line class="gl" x1="70" y1="160" x2="800" y2="160"></line>
+            <line class="gl" x1="70" y1="210" x2="800" y2="210"></line>
+
+            <!-- y labels -->
+            <text class="axis-t" x="0" y="64">$290M</text>
+            <text class="axis-t" x="0" y="114">$260M</text>
+            <text class="axis-t" x="0" y="164">$230M</text>
+            <text class="axis-t" x="0" y="214">$200M</text>
+
+            <g clip-path="url(#wipe)">
+              <path class="band-fill" d="M70,174 L135,164 L200,170 L265,154 L330,142 L395,149 L460,132 L525,122 L590,126 L655,110 L720,100 L790,88 L790,120 L720,132 L655,142 L590,158 L525,154 L460,164 L395,181 L330,174 L265,186 L200,202 L135,196 L70,206 Z"></path>
+              <path class="fc-line" d="M70,190 L135,180 L200,186 L265,170 L330,158 L395,165 L460,148 L525,138 L590,142 L655,126 L720,116 L790,104"></path>
+              <path class="ac-line" d="M70,198 L135,173 L200,181 L265,177 L330,151 L395,171 L460,142 L525,146 L590,135 L655,131 L720,112 L790,109"></path>
+            </g>
+
+            <g class="tipgrp">
+              <circle class="tip-halo" cx="790" cy="109" r="7"></circle>
+              <circle class="tip" cx="790" cy="109" r="3.6"></circle>
+            </g>
+
+            <!-- x labels -->
+            <text class="axis-t" x="60"  y="240">JAN</text>
+            <text class="axis-t" x="190" y="240">MAR</text>
+            <text class="axis-t" x="320" y="240">MAY</text>
+            <text class="axis-t" x="450" y="240">JUL</text>
+            <text class="axis-t" x="580" y="240">SEP</text>
+            <text class="axis-t" x="708" y="240">NOV</text>
+          </svg>
+        </div>
+
+        <div class="tote">
+          <div class="tote-cell"><div class="tote-num">$3B</div><div class="tote-lab">Annual handle<br>under forecast</div></div>
+          <div class="tote-cell"><div class="tote-num">&lt;5%</div><div class="tote-lab">Forecast variance<br>to actuals</div></div>
+          <div class="tote-cell"><div class="tote-num">$20M</div><div class="tote-lab">Promo spend on a<br>measured framework</div></div>
+          <div class="tote-cell"><div class="tote-num">30min</div><div class="tote-lab">Reporting turnaround,<br>down from 3 days</div></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- WHAT I OWN -->
+  <section class="band-sec" id="work">
+    <div class="shell">
+      <div class="sec-head rv">
+        <p class="eyebrow">What I own</p>
+        <h2 class="h-display">Five things leadership calls me about.</h2>
+        <p class="sec-note">Every one of these started as a question about money, not a question about data. That order matters, and it is how I brief the team.</p>
+      </div>
+
+      <div class="ledger">
+        <div class="row rv">
+          <div class="row-t">Forecasting and budgeting</div>
+          <p class="row-d">I own the commercial budget and forecast with Commercial, Marketing, and Acquisition. Leadership plans spend and headcount against these numbers, so the tolerance is tight and the assumptions are written down.</p>
+          <div class="row-p">$3B handle covered<br>Within 5% of actuals</div>
+        </div>
+
+        <div class="row rv">
+          <div class="row-t">Promo and bonus efficiency</div>
+          <p class="row-d">Rebuilt marketing bonus and promo strategy on a measured efficiency framework. Spend that was going out untargeted now runs against modeled cohorts with a read on what each dollar returns.</p>
+          <div class="row-p">$20M annual spend<br>Cohort targeted</div>
+        </div>
+
+        <div class="row rv">
+          <div class="row-t">Competitive share of wallet</div>
+          <p class="row-d">I own the Yipit data partnership and the share of wallet read on where we sit against the field. It goes to leadership and it moves marketing, media, and acquisition spend toward the segments worth taking.</p>
+          <div class="row-p">Yipit partnership<br>Leadership facing</div>
+        </div>
+
+        <div class="row rv">
+          <div class="row-t">The team and the operating model</div>
+          <p class="row-d">Two analysts covering Commercial, Marketing, Acquisition, Finance, Product, and Ops. I replaced an open request queue with a quarterly roadmap tied to commercial priorities, and I set the review standard every deliverable ships against.</p>
+          <div class="row-p">30% capacity freed<br>for proactive work</div>
+        </div>
+
+        <div class="row rv">
+          <div class="row-t">The data platform underneath</div>
+          <p class="row-d">Moved the function off Excel and onto governed pipelines in Python, SQL, Databricks, Unity Catalog, and GitHub. Numbers are versioned, reproducible, and owned rather than rebuilt every cycle. Reusable AI workflows now carry the reporting, forecasting, and ad hoc load.</p>
+          <div class="row-p">20 hrs/week of manual<br>work removed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW I WORK -->
+  <section class="band-sec" style="padding-top:0">
+    <div class="shell">
+      <div class="sec-head rv">
+        <p class="eyebrow">How I work</p>
+        <h2 class="h-display">Three rules I actually hold to.</h2>
+      </div>
+      <div class="tenets rv">
+        <div class="tenet">
+          <div class="tenet-k">Business first</div>
+          <h3>Learn the P&amp;L before touching the query</h3>
+          <p>Analysis is not the product. A better decision is. I want to know how the vertical makes money and where it leaks before I decide what is worth measuring.</p>
+        </div>
+        <div class="tenet">
+          <div class="tenet-k">Build once</div>
+          <h3>If we run it twice, it becomes a pipeline</h3>
+          <p>Recurring work belongs in version control with an owner and a test, not in a workbook someone rebuilds each month. That is what buys the team room to think.</p>
+        </div>
+        <div class="tenet">
+          <div class="tenet-k">Say the number</div>
+          <h3>End with a recommendation, not a description</h3>
+          <p>A weekly report that explains what happened is a summary. Stakeholders need the read and the call. I train the team to write the last slide first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACK RECORD -->
+  <section class="band-sec" id="record" style="padding-top:0">
+    <div class="shell">
+      <div class="sec-head rv">
+        <p class="eyebrow">Track record</p>
+        <h2 class="h-display">Technical foundation, analytical depth, then the function.</h2>
+      </div>
+
+      <article class="job rv">
+        <div class="job-when">Jan 2025 to present<span class="job-where">FanDuel</span></div>
+        <div>
+          <h3>Commercial Analytics Manager</h3>
+          <ul>
+            <li>Manage two analysts serving Commercial, Marketing, Acquisition, Finance, Product, and Ops, and set the review standard every deliverable ships against.</li>
+            <li>Own the commercial budget and forecast covering $3B in annual handle, landing within 5% of actuals.</li>
+            <li>Rebuilt $20M of annual bonus and promo spend onto a measured efficiency framework with modeled cohort targeting.</li>
+            <li>Traded an open request queue for a quarterly roadmap. Recurring reporting went from 3 days to 30 minutes and freed 30% of team capacity.</li>
+            <li>Lead analytics strategy for Project Play Shift and built the analytical framework behind the racing Long Term Model with Strategy.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job rv">
+        <div class="job-when">Mar 2022 to Jan 2025<span class="job-where">FanDuel</span></div>
+        <div>
+          <h3>Commercial Senior Analyst</h3>
+          <ul>
+            <li>Built the baseline forecasts for racing handle, revenue, and actives that became the planning standard for the vertical.</li>
+            <li>Rebuilt the weekly performance report and took the read straight to stakeholders, replacing a description of what happened with a recommendation on what to do next.</li>
+            <li>Sized Racing's contribution to the wider business as share of wallet, which reframed how the vertical was valued in planning and investment discussions.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job rv">
+        <div class="job-when">Jun 2020 to Feb 2022<span class="job-where">Farmers Insurance</span></div>
+        <div>
+          <h3>Product Analyst</h3>
+          <ul>
+            <li>Built pricing models and dashboards that leadership adopted for premium and rate decisions across four states.</li>
+            <li>Automated recurring reporting in Python and analyzed customer policy data in SAS, SQL, and Python.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- KIT -->
+  <section class="band-sec" style="padding-top:0">
+    <div class="shell">
+      <div class="sec-head rv">
+        <p class="eyebrow">Toolkit and training</p>
+        <h2 class="h-display">What I build with.</h2>
+      </div>
+      <div class="kit rv">
+        <div>
+          <div class="kit-grp">
+            <h3>Technical</h3>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">R</span>
+              <span class="chip">SAS</span><span class="chip">C++</span><span class="chip">MATLAB</span>
+              <span class="chip">Databricks</span><span class="chip">Unity Catalog</span><span class="chip">GitHub</span>
+              <span class="chip">Tableau</span><span class="chip">Power BI</span><span class="chip">Excel (VBA)</span>
+            </div>
+          </div>
+          <div class="kit-grp" style="margin-top:34px">
+            <h3>AI tooling</h3>
+            <div class="chips">
+              <span class="chip">Claude</span><span class="chip">Claude Cowork</span>
+              <span class="chip">Cursor</span><span class="chip">OpenAI API</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="kit-grp">
+            <h3>Education</h3>
+            <p class="deg"><b>M.S. Applied Mathematics</b><span>Cal State Long Beach · 4.0 GPA · Dec 2022</span></p>
+            <p class="deg"><b>B.S. Financial Actuarial Mathematics</b><span>UCLA · Jun 2016</span></p>
+          </div>
+          <div class="kit-grp" style="margin-top:34px">
+            <h3>Actuarial exams</h3>
+            <div class="chips">
+              <span class="chip">Probability (P)</span>
+              <span class="chip">Financial Mathematics (FM)</span>
+              <span class="chip">Financial Models (3F)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="shell">
+      <p class="eyebrow rv">Contact</p>
+      <h2 class="h-display rv" style="margin-top:16px">Tell me what your <span style="color:var(--tote)">number</span> needs to be. I will tell you what moves it.</h2>
+      <div class="links rv">
+        <a href="mailto:hoandinh041094@g.ucla.edu">hoandinh041094@g.ucla.edu</a>
+        <a href="tel:+13236295520">(323) 629-5520</a>
+        <a href="https://www.linkedin.com/in/YOUR-HANDLE" rel="me">LinkedIn</a>
+        <a href="Hoan_Dinh_Resume.pdf">Download resume (PDF)</a>
+      </div>
+      <div class="colophon">
+        <span>Hoan Dinh · Los Angeles, CA</span>
+        <span>Commercial Analytics</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // scroll reveal
+  var items = document.querySelectorAll('.rv');
+  if(reduce || !('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  // chart draw-in once the figure is on screen
+  var fig = document.querySelector('.chart-wrap');
+  if(fig){
+    if(reduce){ fig.classList.add('animate'); }
+    else {
+      setTimeout(function(){ fig.classList.add('animate'); }, 260);
+    }
+  }
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Hoan Dinh",
+  "jobTitle": "Commercial Analytics Manager",
+  "worksFor": {"@type": "Organization", "name": "FanDuel"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Los Angeles", "addressRegion": "CA"},
+  "email": "mailto:hoandinh041094@g.ucla.edu",
+  "alumniOf": [
+    {"@type": "CollegeOrUniversity", "name": "University of California, Los Angeles"},
+    {"@type": "CollegeOrUniversity", "name": "California State University, Long Beach"}
+  ],
+  "knowsAbout": ["Commercial analytics", "Forecasting", "Promotion efficiency", "Python", "SQL", "Databricks"]
+}
+</script>
+</body>
+</html>
